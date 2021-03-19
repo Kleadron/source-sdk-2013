@@ -382,37 +382,36 @@ void CBaseViewModel::SendViewModelMatchingSequence( int sequence )
 #include "ivieweffects.h"
 #endif
 
+#if defined ( CLIENT_DLL )
+ConVar cl_viewmodel_bob("cl_viewmodel_bob", "1");
+#endif
+
 void CBaseViewModel::CalcViewModelView( CBasePlayer *owner, const Vector& eyePosition, const QAngle& eyeAngles )
 {
 	// UNDONE: Calc this on the server?  Disabled for now as it seems unnecessary to have this info on the server
 #if defined( CLIENT_DLL )
+
 	QAngle vmangoriginal = eyeAngles;
 	QAngle vmangles = eyeAngles;
 	Vector vmorigin = eyePosition;
 
 	CBaseCombatWeapon *pWeapon = m_hWeapon.Get();
-	//Allow weapon lagging
-	if ( pWeapon != NULL )
-	{
-#if defined( CLIENT_DLL )
-		if ( !prediction->InPrediction() )
-#endif
+	if (cl_viewmodel_bob.GetBool()) {
+		//Allow weapon lagging
+		if ( pWeapon != NULL )
 		{
-			// add weapon-specific bob 
-			pWeapon->AddViewmodelBob( this, vmorigin, vmangles );
-#if defined ( CSTRIKE_DLL )
-			CalcViewModelLag( vmorigin, vmangles, vmangoriginal );
+#if defined( CLIENT_DLL )
+			if ( !prediction->InPrediction() )
 #endif
+			{
+				// add weapon-specific bob 
+				pWeapon->AddViewmodelBob( this, vmorigin, vmangles );
+				CalcViewModelLag( vmorigin, vmangles, vmangoriginal );
+			}
 		}
+		// Add model-specific bob even if no weapon associated (for head bob for off hand models)
+		AddViewModelBob( owner, vmorigin, vmangles );
 	}
-	// Add model-specific bob even if no weapon associated (for head bob for off hand models)
-	AddViewModelBob( owner, vmorigin, vmangles );
-#if !defined ( CSTRIKE_DLL )
-	// This was causing weapon jitter when rotating in updated CS:S; original Source had this in above InPrediction block  07/14/10
-	// Add lag
-	CalcViewModelLag( vmorigin, vmangles, vmangoriginal );
-#endif
-
 #if defined( CLIENT_DLL )
 	if ( !prediction->InPrediction() )
 	{

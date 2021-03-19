@@ -64,6 +64,13 @@ ConVar debug_latch_reset_onduck( "debug_latch_reset_onduck", "1", FCVAR_CHEAT );
 // [MD] I'll remove this eventually. For now, I want the ability to A/B the optimizations.
 bool g_bMovementOptimizations = true;
 
+// https://developer.valvesoftware.com/wiki/Talk:Camera_Bob
+// Camera Bob
+ConVar cl_viewbob_enabled("cl_viewbob_enabled", "0", 0, "Oscillation Toggle", true, 0, true, 1);
+ConVar cl_viewbob_timer("cl_viewbob_timer", "6", 0, "Speed of Oscillation");
+ConVar cl_viewbob_scale_x("cl_viewbob_scale_x", "0.02", 0, "Magnitude of Oscillation");
+ConVar cl_viewbob_scale_z("cl_viewbob_scale_z", "0.5", 0, "Magnitude of Oscillation");
+
 // Roughly how often we want to update the info about the ground surface we're on.
 // We don't need to do this very often.
 #define CATEGORIZE_GROUND_SURFACE_INTERVAL			0.3f
@@ -1894,6 +1901,17 @@ void CGameMovement::StayOnGround( void )
 //-----------------------------------------------------------------------------
 void CGameMovement::WalkMove( void )
 {
+	// https://developer.valvesoftware.com/wiki/Talk:Camera_Bob
+	//view bob code
+	if (cl_viewbob_enabled.GetInt() == 1 && !engine->IsPaused())
+	{
+		float xoffset = sin(gpGlobals->curtime * cl_viewbob_timer.GetFloat()) * player->GetAbsVelocity().Length() * cl_viewbob_scale_x.GetFloat() / 100;
+		float zoffset = sin(2 * gpGlobals->curtime * cl_viewbob_timer.GetFloat()) * player->GetAbsVelocity().Length() * cl_viewbob_scale_z.GetFloat() / 400;
+
+		player->ViewPunch(QAngle(xoffset / 5, 0, zoffset / 5));
+	}
+	//end view bob code
+
 	int i;
 
 	Vector wishvel;
@@ -2433,10 +2451,10 @@ bool CGameMovement::CheckJumpButton( void )
 	if ( g_bMovementOptimizations )
 	{
 #if defined(HL2_DLL) || defined(HL2_CLIENT_DLL)
-		Assert( GetCurrentGravity() == 600.0f );
-		flMul = 160.0f;	// approx. 21 units.
+		//Assert( GetCurrentGravity() == 600.0f );
+		flMul = 160.0f * 2;	// approx. 21 units.
 #else
-		Assert( GetCurrentGravity() == 800.0f );
+		//Assert( GetCurrentGravity() == 800.0f );
 		flMul = 268.3281572999747f;
 #endif
 

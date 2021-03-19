@@ -580,8 +580,9 @@ void CWorld::Precache( void )
 	g_fGameOver = false;
 	g_pLastSpawn = NULL;
 
-	ConVarRef stepsize( "sv_stepsize" );
-	stepsize.SetValue( 18 );
+	// wtf
+	//ConVarRef stepsize( "sv_stepsize" );
+	//stepsize.SetValue( 18 ); 
 
 	ConVarRef roomtype( "room_type" );
 	roomtype.SetValue( 0 );

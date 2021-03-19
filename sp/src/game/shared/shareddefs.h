@@ -106,8 +106,8 @@ public:
 	#define TIME_TO_DUCK		0.2
 	#define TIME_TO_DUCK_MS		200.0f
 #else
-	#define TIME_TO_DUCK		0.4
-	#define TIME_TO_DUCK_MS		400.0f
+	#define TIME_TO_DUCK		0.2    //0.4
+	#define TIME_TO_DUCK_MS		200.0f // 200.0f
 #endif 
 #define TIME_TO_UNDUCK		0.2
 #define TIME_TO_UNDUCK_MS	200.0f
@@ -369,13 +369,13 @@ enum PLAYER_ANIM
 #define PLAYER_MAX_SAFE_FALL_SPEED	526.5f // approx 20 feet sqrt( 2 * gravity * 20 * 12 )
 #define PLAYER_LAND_ON_FLOATING_OBJECT	173 // Can fall another 173 in/sec without getting hurt
 #define PLAYER_MIN_BOUNCE_SPEED		173
-#define PLAYER_FALL_PUNCH_THRESHOLD 303.0f // won't punch player's screen/make scrape noise unless player falling at least this fast - at least a 76" fall (sqrt( 2 * g * 76))
+#define PLAYER_FALL_PUNCH_THRESHOLD 503.0f // won't punch player's screen/make scrape noise unless player falling at least this fast - at least a 76" fall (sqrt( 2 * g * 76))
 #else
 #define PLAYER_FATAL_FALL_SPEED		1024 // approx 60 feet
 #define PLAYER_MAX_SAFE_FALL_SPEED	580 // approx 20 feet
 #define PLAYER_LAND_ON_FLOATING_OBJECT	200 // Can go another 200 units without getting hurt
 #define PLAYER_MIN_BOUNCE_SPEED		200
-#define PLAYER_FALL_PUNCH_THRESHOLD (float)350 // won't punch player's screen/make scrape noise unless player falling at least this fast.
+#define PLAYER_FALL_PUNCH_THRESHOLD (float)550 // won't punch player's screen/make scrape noise unless player falling at least this fast.
 #endif
 #define DAMAGE_FOR_FALL_SPEED		100.0f / ( PLAYER_FATAL_FALL_SPEED - PLAYER_MAX_SAFE_FALL_SPEED ) // damage per unit per second.
 

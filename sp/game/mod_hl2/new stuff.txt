@@ -1,0 +1,4 @@
+console commands:
+cl_viewbob_enabled - enables new view bobbing
+cl_viewmodel_bob - enables/disables default hl2 bobing for viewmodel
+cl_viewmodel_lag - enables/disables default hl2 sway when looking

@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "MMtextures/ice"
+	"$surfaceprop" "Ice"
+}

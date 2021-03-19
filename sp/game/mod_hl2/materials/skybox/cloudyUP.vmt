@@ -1,0 +1,7 @@
+"unlitgeneric"
+{
+	"$basetexture" "skybox/cloudyUP"
+	"$hdrcompressedtexture" "skybox/cloudyUP"
+	"$nofog" 1
+	"$ignorez" 1
+}

@@ -632,12 +632,12 @@ Scheme
 		{
 			"1"
 			{
-				"name"  "HalfLife2"
+				"name"  "04b08"
 				"tall"			"32"
 				"tall_hidef"	"46"
 				"weight" "0"
 				"additive" "0"
-				"antialias" "1"
+				"antialias" "0"
 				"custom"	"1" [$OSX]
 			}
 		}
@@ -794,6 +794,8 @@ Scheme
 	{
 		"1"		"resource/HALFLIFE2.ttf"
 		"2"		"resource/HL2crosshairs.ttf"
+		"3"		"resource/04b08.ttf"
+		"4"		"resource/04b03b.ttf"
 	}
 
 }
