@@ -60,10 +60,10 @@ Scheme
 		Frame.TitleTextInsetX			16
 		Frame.ClientInsetX				8 // 8
 		Frame.ClientInsetY				6 // 6
-		Frame.BgColor					"160 160 160 128"
-		Frame.OutOfFocusBgColor			"160 160 160 32"
-		Frame.FocusTransitionEffectTime	"0.3"	// time it takes for a window to fade in/out on focus/out of focus
-		Frame.TransitionEffectTime		"0.3"	// time it takes for a window to fade in/out on open/close
+		Frame.BgColor					"120 120 120 192"
+		Frame.OutOfFocusBgColor			"120 120 120 64"
+		Frame.FocusTransitionEffectTime	"0.25"	// time it takes for a window to fade in/out on focus/out of focus
+		Frame.TransitionEffectTime		"0.25"	// time it takes for a window to fade in/out on open/close
 		Frame.AutoSnapRange				"0"
 		FrameGrip.Color1				"White"
 		FrameGrip.Color2				"0 0 0 196"
@@ -73,8 +73,8 @@ Scheme
 		FrameTitleButton.DisabledBgColor	"Blank"
 		FrameSystemButton.FgColor		"Blank"
 		FrameSystemButton.BgColor		"Blank"
-		FrameSystemButton.Icon			"system_button"
-		FrameSystemButton.DisabledIcon	"system_button"
+		FrameSystemButton.Icon			"" //system_button
+		FrameSystemButton.DisabledIcon	""
 		FrameTitleBar.Font				"UiBold"
 		FrameTitleBar.TextColor			"White"
 		FrameTitleBar.BgColor			"Blank"
@@ -101,7 +101,7 @@ Scheme
 		ListPanel.EmptyListInfoTextColor	"OffWhite"
 
 		Menu.TextColor					"White"
-		Menu.BgColor					"160 160 160 64"
+		Menu.BgColor					"120 120 120 64"
 		Menu.ArmedTextColor				"Black"
 		Menu.ArmedBgColor				"Orange"
 		Menu.TextInset					"6"
@@ -237,6 +237,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"16"
 				"weight"	"500"
+				"antialias" "1"
 			}
 		}
 		"DefaultBold"
@@ -246,6 +247,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"16"
 				"weight"	"1000"
+				"antialias" "1"
 			}
 		}
 		"DefaultUnderline"
@@ -256,6 +258,7 @@ Scheme
 				"tall"		"16"
 				"weight"	"500"
 				"underline" "1"
+				"antialias" "1"
 			}
 		}
 		"DefaultSmall"
@@ -265,6 +268,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"12"
 				"weight"	"0"
+				"antialias" "1"
 			}
 		}
 		"DefaultSmallDropShadow"
@@ -275,6 +279,7 @@ Scheme
 				"tall"		"13"
 				"weight"	"0"
 				"dropshadow" "1"
+				"antialias" "1"
 			}
 		}
 		"DefaultVerySmall"
@@ -284,6 +289,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"12"
 				"weight"	"0"
+				"antialias" "1"
 			}
 		}
 
@@ -294,6 +300,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"18"
 				"weight"	"0"
+				"antialias" "1"
 			}
 		}
 		"UiBold"
@@ -303,6 +310,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"12"
 				"weight"	"1000"
+				"antialias" "1"
 			}
 		}
 		"MenuLarge"
@@ -323,6 +331,7 @@ Scheme
 				"name"		"Lucida Console"
 				"tall"		"10"
 				"weight"	"500"
+				"antialias" "1"
 			}
 		}
 
@@ -345,6 +354,7 @@ Scheme
 				"name"		"Trebuchet MS"
 				"tall"		"24"
 				"weight"	"900"
+				"antialias" "1"
 			}
 		}
 
@@ -356,6 +366,7 @@ Scheme
 				"name"		"Trebuchet MS"
 				"tall"		"20"
 				"weight"	"900"
+				"antialias" "1"
 			}
 		}
 
@@ -366,6 +377,7 @@ Scheme
 				"name"		"Trebuchet MS"
 				"tall"		"18"
 				"weight"	"900"
+				"antialias" "1"
 			}
 		}
 
@@ -432,6 +444,7 @@ Scheme
 				"name"		"Lucida Console"
 				"tall"		"10"
 				"weight"	"0"
+				"antialias" "1"
 			}
 //			"1"
 //			{
@@ -449,6 +462,7 @@ Scheme
 				"tall"		"10"
 				"weight"	"0"
 				"dropshadow" "1"
+				"antialias" "1"
 			}
 //			"1"
 //			{
@@ -465,6 +479,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"16"
 				"weight"	"500"
+				"antialias" "1"
 			}
 		}
 		"CloseCaption_Italic"
@@ -475,6 +490,7 @@ Scheme
 				"tall"		"16"
 				"weight"	"500"
 				"italic"	"1"
+				"antialias" "1"
 			}
 		}
 		"CloseCaption_Bold"
@@ -484,6 +500,7 @@ Scheme
 				"name"		"Tahoma"
 				"tall"		"16"
 				"weight"	"900"
+				"antialias" "1"
 			}
 		}
 		"CloseCaption_BoldItalic"
@@ -494,6 +511,7 @@ Scheme
 				"tall"		"16"
 				"weight"	"900"
 				"italic"	"1"
+				"antialias" "1"
 			}
 		}
 
@@ -506,6 +524,7 @@ Scheme
 				"weight"	"400"
 				"antialias"	"1"
 				"custom"	"1"
+				"antialias" "1"
 			}
 		}
 

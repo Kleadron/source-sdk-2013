@@ -204,7 +204,7 @@ void bf_write::SeekToBit( int bitPos )
 	m_iCurBit = bitPos;
 }
 
-
+// \/ THIS SEEMS TO SOLVE NOTHING AND IS JUST ANNOYING
 // Sign bit comes first
 void bf_write::WriteSBitLong( int data, int numbits )
 {

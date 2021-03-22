@@ -990,7 +990,7 @@ void UTIL_ScreenFadeWrite( const ScreenFade_t &fade, CBaseEntity *pEntity )
 
 	UserMessageBegin( user, "Fade" );		// use the magic #1 for "one client"
 		WRITE_SHORT( fade.duration );		// fade lasts this long
-		WRITE_SHORT( fade.holdTime );		// fade lasts this long
+		WRITE_WORD( fade.holdTime );		// fade lasts this long // 3/20/2021 changed to WRITE_WORD to see if it fixes a problem
 		WRITE_SHORT( fade.fadeFlags );		// fade type (in / out)
 		WRITE_BYTE( fade.r );				// fade red
 		WRITE_BYTE( fade.g );				// fade green

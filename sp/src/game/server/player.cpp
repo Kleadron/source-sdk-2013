@@ -6158,7 +6158,7 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		GiveNamedItem( "weapon_ar2" );
 		GiveNamedItem( "weapon_shotgun" );
 		GiveNamedItem( "weapon_physcannon" );
-		GiveNamedItem( "weapon_bugbait" );
+		//GiveNamedItem( "weapon_bugbait" );
 		GiveNamedItem( "weapon_rpg" );
 		GiveNamedItem( "weapon_357" );
 		GiveNamedItem( "weapon_crossbow" );
@@ -6170,7 +6170,11 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		{
 			TakeHealth( 25, DMG_GENERIC );
 		}
-		
+
+		for (int i = 0; i < 10; i++) {
+			GiveNamedItem("item_battery");
+		}
+
 		gEvilImpulse101		= false;
 
 		break;

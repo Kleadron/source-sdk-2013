@@ -4,8 +4,8 @@ WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
 	"printname"			"Assault Rifle"
-	"viewmodel"			"models/v_9mmar.mdl"
-	"playermodel"			"models/w_9mmar.mdl"
+	"viewmodel"			"models/weapons/assaultrifle/v_9mmar.mdl"
+	"playermodel"			"models/weapons/assaultrifle/w_9mmar.mdl"
 	"anim_prefix"			"assaultrifle"
 	"bucket"			"2"
 	"bucket_position"		"2"
@@ -60,8 +60,11 @@ WeaponData
 		}
 		"crosshair"
 		{
-				"font"		"Crosshairs"
-				"character"	"Q"
+				"file"		"sprites/crosshairs"
+				"x"			"72"
+				"y"			"24"
+				"width"		"24"
+				"height"	"24"
 		}
 		"autoaim"
 		{

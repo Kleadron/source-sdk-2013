@@ -79,9 +79,9 @@ extern int gEvilImpulse101;
 
 ConVar sv_autojump( "sv_autojump", "0" );
 
-ConVar hl2_walkspeed( "hl2_walkspeed", "230" );
-ConVar hl2_normspeed( "hl2_normspeed", "230" );
-ConVar hl2_sprintspeed( "hl2_sprintspeed", "420" );
+ConVar hl2_walkspeed	( "hl2_walkspeed",		"230" );
+ConVar hl2_normspeed	( "hl2_normspeed",		"230" );
+ConVar hl2_sprintspeed	( "hl2_sprintspeed",	"520" );
 
 ConVar hl2_darkness_flashlight_factor ( "hl2_darkness_flashlight_factor", "1" );
 
@@ -1135,9 +1135,9 @@ void CHL2_Player::Spawn(void)
 	InitSprinting();
 
 	// Setup our flashlight values
-#ifdef HL2_EPISODIC
+//#ifdef HL2_EPISODIC
 	m_HL2Local.m_flFlashBattery = 100.0f;
-#endif 
+//#endif 
 
 	GetPlayerProxy();
 
@@ -3244,7 +3244,7 @@ void CHL2_Player::UpdateClientData( void )
 	}
 
 	// Update Flashlight
-#ifdef HL2_EPISODIC
+//#ifdef HL2_EPISODIC
 	if ( Flashlight_UseLegacyVersion() == false )
 	{
 		if ( FlashlightIsOn() && sv_infinite_aux_power.GetBool() == false )
@@ -3269,7 +3269,7 @@ void CHL2_Player::UpdateClientData( void )
 	{
 		m_HL2Local.m_flFlashBattery = -1.0f;
 	}
-#endif // HL2_EPISODIC
+//#endif // HL2_EPISODIC
 
 	BaseClass::UpdateClientData();
 }
