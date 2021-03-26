@@ -1,6 +1,6 @@
 "GameInfo"
 {
-	game 		"Kleadron's Shooter"
+	game 		"K-FPS"
 	title 		"K-FPS"
 	title2		""
 	icon		"resource/icon"

@@ -16,6 +16,8 @@
 #include "vgui/ISurface.h"
 #include "../hud_crosshair.h"
 #include "VGuiMatSurface/IMatSystemSurface.h"
+#include "hud_macros.h"
+
 
 #ifdef SIXENSE
 #include "sixense/in_sixense.h"
@@ -27,6 +29,7 @@ int ScreenTransform( const Vector& point, Vector& screen );
 #include "tier0/memdbgon.h"
 
 #define	HEALTH_WARNING_THRESHOLD	25
+#define	BATTERY_WARNING_THRESHOLD	15
 
 static ConVar	hud_quickinfo( "hud_quickinfo", "1", FCVAR_ARCHIVE );
 
@@ -58,6 +61,8 @@ public:
 	virtual void Paint();
 	
 	virtual void ApplySchemeSettings( IScheme *scheme );
+
+	void MsgFunc_Battery(bf_read &msg);
 private:
 	
 	void	DrawWarning( int x, int y, CHudTexture *icon, float &time );
@@ -66,12 +71,16 @@ private:
 
 	int		m_lastAmmo;
 	int		m_lastHealth;
+	int		m_lastBattery;
+	int		m_curBattery;
 
 	float	m_ammoFade;
 	float	m_healthFade;
+	float	m_batteryFade;
 
 	bool	m_warnAmmo;
 	bool	m_warnHealth;
+	bool	m_warnBattery;
 
 	bool	m_bFadedOut;
 	
@@ -90,6 +99,7 @@ private:
 };
 
 DECLARE_HUDELEMENT( CHUDQuickInfo );
+DECLARE_HUD_MESSAGE(CHUDQuickInfo, Battery);
 
 CHUDQuickInfo::CHUDQuickInfo( const char *pElementName ) :
 	CHudElement( pElementName ), BaseClass( NULL, "HUDQuickInfo" )
@@ -111,14 +121,20 @@ void CHUDQuickInfo::ApplySchemeSettings( IScheme *scheme )
 
 void CHUDQuickInfo::Init( void )
 {
+	HOOK_HUD_MESSAGE(CHUDQuickInfo, Battery);
+
 	m_ammoFade		= 0.0f;
 	m_healthFade	= 0.0f;
+	m_batteryFade	= 0.0f;
 
 	m_lastAmmo		= 0;
 	m_lastHealth	= 100;
+	m_lastBattery	= 0;
+	m_curBattery	= 0;
 
 	m_warnAmmo		= false;
 	m_warnHealth	= false;
+	m_warnBattery	= false;
 
 	m_bFadedOut			= false;
 	m_bDimmed			= false;
@@ -312,6 +328,29 @@ void CHUDQuickInfo::Paint()
 		}
 	}
 
+	// Check our battery for a warning
+	if (m_curBattery != m_lastBattery)
+	{
+		UpdateEventTime();
+		m_lastBattery = m_curBattery;
+
+		if (m_curBattery <= BATTERY_WARNING_THRESHOLD)
+		{
+			if (m_warnBattery == false)
+			{
+				m_batteryFade = 255;
+				m_warnBattery = true;
+
+				CLocalPlayerFilter filter;
+				C_BaseEntity::EmitSound(filter, SOUND_FROM_LOCAL_PLAYER, "HUDQuickInfo.LowHealth");
+			}
+		}
+		else
+		{
+			m_warnBattery = false;
+		}
+	}
+
 	Color clrNormal = gHUD.m_clrNormal;
 	clrNormal[3] = 255 * scalar;
 	m_icon_c->DrawSelf( xCenter, yCenter, clrNormal );
@@ -350,6 +389,30 @@ void CHUDQuickInfo::Paint()
 		}
 		
 		gHUD.DrawIconProgressBar( xCenter - (m_icon_lb->Width() * 2), yCenter, m_icon_lb, m_icon_lbe, ( 1.0f - healthPerc ), healthColor, CHud::HUDPB_VERTICAL );
+	}
+
+	// Update our battery
+	if (m_batteryFade > 0.0f)
+	{
+		DrawWarning(xCenter - (m_icon_lb->Width() * 2.5), yCenter, m_icon_lb, m_batteryFade);
+	}
+	else
+	{
+		float batteryPerc = (float)m_curBattery / 100.0f;
+		batteryPerc = clamp(batteryPerc, 0.0f, 1.0f);
+
+		Color batColor = m_warnBattery ? gHUD.m_clrCaution : gHUD.m_clrNormal;
+
+		if (m_warnBattery)
+		{
+			batColor[3] = 255 * sinScale;
+		}
+		else
+		{
+			batColor[3] = 255 * scalar;
+		}
+
+		gHUD.DrawIconProgressBar(xCenter - (m_icon_lb->Width() * 2.5), yCenter, m_icon_lb, m_icon_lbe, (1.0f - batteryPerc), batColor, CHud::HUDPB_VERTICAL);
 	}
 
 	// Update our ammo
@@ -404,5 +467,13 @@ bool CHUDQuickInfo::EventTimeElapsed( void )
 		return true;
 
 	return false;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Get the current battery power from the player
+//-----------------------------------------------------------------------------
+void CHUDQuickInfo::MsgFunc_Battery(bf_read &msg)
+{
+	m_curBattery = msg.ReadShort();
 }
 

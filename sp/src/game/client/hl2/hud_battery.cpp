@@ -139,7 +139,7 @@ void CHudBattery::OnThink( void )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: 
+// Purpose: Get the current battery power from the player
 //-----------------------------------------------------------------------------
 void CHudBattery::MsgFunc_Battery( bf_read &msg )
 {

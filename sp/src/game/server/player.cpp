@@ -6134,7 +6134,6 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 
 	case 101:
 		gEvilImpulse101 = true;
-
 		EquipSuit();
 
 		// Give the player everything!
@@ -6148,9 +6147,6 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		GiveAmmo( 5,	"grenade");
 		GiveAmmo( 32,	"357" );
 		GiveAmmo( 16,	"XBowBolt" );
-#ifdef HL2_EPISODIC
-		GiveAmmo( 5,	"Hopwire" );
-#endif		
 		GiveNamedItem( "weapon_smg1" );
 		GiveNamedItem( "weapon_frag" );
 		GiveNamedItem( "weapon_crowbar" );
@@ -6162,9 +6158,6 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		GiveNamedItem( "weapon_rpg" );
 		GiveNamedItem( "weapon_357" );
 		GiveNamedItem( "weapon_crossbow" );
-#ifdef HL2_EPISODIC
-		// GiveNamedItem( "weapon_magnade" );
-#endif
 		GiveNamedItem("weapon_assaultrifle");
 		if ( GetHealth() < 100 )
 		{
@@ -6176,7 +6169,35 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 		}
 
 		gEvilImpulse101		= false;
+		/*
+		gEvilImpulse101 = true;
 
+		EquipSuit();
+
+		// Give the player everything!
+		GiveAmmo(255, "Pistol");
+		GiveAmmo(255, "SMG1");
+		GiveAmmo(255, "Buckshot");
+		GiveAmmo(3, "smg1_grenade");
+		GiveAmmo(5, "grenade");
+		GiveAmmo(16, "XBowBolt");
+		GiveNamedItem("weapon_smg1");
+		GiveNamedItem("weapon_frag");
+		GiveNamedItem("weapon_pistol");
+		GiveNamedItem("weapon_shotgun");
+		GiveNamedItem("weapon_crossbow");
+		//GiveNamedItem("weapon_assaultrifle");
+		if (GetHealth() < 100)
+		{
+			TakeHealth(25, DMG_GENERIC);
+		}
+
+		for (int i = 0; i < 10; i++) {
+			GiveNamedItem("item_battery");
+		}
+
+		gEvilImpulse101 = false;
+		*/
 		break;
 
 	case 102:
